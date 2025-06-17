@@ -5,7 +5,9 @@ function App() {
 
   return (
     <>
-    app.jsx
+    <main>
+      hey there
+    </main>
     </>
   )
 }

@@ -1,22 +1,31 @@
 import express from 'express'
 import cors from 'cors'
+import session from 'express-session'
 import dotenv from 'dotenv'
-import passport from 'passport'
-import googleStrategy from 'passport-google-oauth20'
 
 dotenv.config()
 
 const PORT = process.env.PORT || 1111
 const app = express()
 
-//Middlewares for cors,body parsing
 app.use(cors())
+
+//Middlewares for cors,body parsing
+
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "my-secret-key",
+    cookie: { secure: false, httpOnly: true },
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
 
 //Routes
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.cookie("ram","hom mero name")
+    res.send('Hello World there');
 });
 
 //Listening to the request
