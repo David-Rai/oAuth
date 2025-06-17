@@ -42,19 +42,23 @@ const mailOptions={
     ]
 }
 
-// 3. finally send the email to the receiption
-transporter.sendMail(mailOptions,(err,info)=>{
-    if(err){
-        console.log(err)
-        return
-    }
-    console.log(info)
-})
 
 //Routes
 app.get('/', (req, res) => {
     res.send('Hello World there');
 });
+
+//send email to my real gmail routes
+app.get("/send",(req,res)=>{
+    // 3. finally send the email to the receiption
+transporter.sendMail(mailOptions,(err,info)=>{
+    if(err){
+        console.log(err)
+        return res.status(500).send(err)
+    }
+    res.json(info)
+})
+})
 
 //Listening to the request
 app.listen(PORT, () => {
